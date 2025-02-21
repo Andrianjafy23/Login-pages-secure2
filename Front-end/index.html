@@ -133,10 +133,10 @@
     <div class="login">
         <h1>Connexion</h1>
         <div class="connecter">
-            <form action="/login" method="POST">
+            <form id="loginForm" action="/login" method="POST">
                 <div class="email">
                     <label id="email" for="">Email</label>
-                    <input type="email" name="email" placeholder="Entrez votre email" required />
+                    <input type="email" id="loginEmail" name="email" placeholder="Entrez votre email" required />
                 </div>
                 <div class="pass">
                     <label id="mots" for="">Mots de passe</label>
@@ -153,7 +153,7 @@
             </button>
         </div>
     </div>
-
+    <script src="index.js"></script>
     <script>
         document.getElementById("Afficher").addEventListener("change", function () {
             let passwordField = document.getElementById("password");

@@ -30,7 +30,7 @@ app.use(
 
 
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Connecté à MongoDB Atlas"))
+    .then(() => console.log("Connecté à Mongo local"))
     .catch(err => console.error("Erreur de connexion à MongoDB:", err));
 
 
@@ -43,14 +43,15 @@ function isAuthenticated(req, res, next) {
 }
 
 // Routes
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "Front", "index.html")));
-app.get("/inscrit", (req, res) => res.sendFile(path.join(__dirname, "Front", "inscrit.html")));
-app.get("/secure", isAuthenticated, (req, res) => res.sendFile(path.join(__dirname, "Front", "secure.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "index.html")));
+app.get("/inscrit", (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "inscrit.html")));
+app.get("/secure", isAuthenticated, (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "secure.html")));
 
 app.get("/user", (req, res) => {
   if (req.session.userName) {
-    res.json({ name: req.session.userName });
-  } else {
+    res.json({ name: req.session.userName});
+  }
+   else {
     res.status(401).json({ message: "Non connecté" });
   }
 });
