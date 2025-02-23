@@ -146,23 +146,23 @@
                     <input type="checkbox" id="Afficher"> 
                     <p>Afficher le mots passe</p> 
                 </div>               
-                <button type="submit">Se connecter</button>
+                <button type="submit">Se connecter</button>     
             </form>
             <button class="butt">
                 <a href="/inscrit">Créer un compte</a>
             </button>
         </div>
     </div>
-    <script src="index.js"></script>
+    <script src="connex.js" defer></script>
     <script>
         document.getElementById("Afficher").addEventListener("change", function () {
-            let passwordField = document.getElementById("password");
-            if (this.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        });
+    let passwordField = document.getElementById("password");
+    if (this.checked) {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+});
     </script>
 </body>
 

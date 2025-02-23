@@ -29,12 +29,12 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     // }
 });
 
-function updateUserInfo() {
-    const user = localStorage.getItem("user");
-    if (user) {
-        const userData = JSON.parse(user);
-        document.getElementById("userInfo").textContent = `Connecté en tant que : ${userData.name}`;
-    } else {
-        document.getElementById("userInfo").textContent = "Non connecté";
-    }
-}
+// function updateUserInfo() {
+//     const user = localStorage.getItem("user");
+//     if (user) {
+//         const userData = JSON.parse(user);
+//         document.getElementById("userInfo").textContent = `Connecté en tant que : ${userData.name}`;
+//     } else {
+//         document.getElementById("userInfo").textContent = "Non connecté";
+//     }
+// }

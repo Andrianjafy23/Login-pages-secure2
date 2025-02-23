@@ -47,6 +47,7 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "in
 app.get("/inscrit", (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "inscrit.html")));
 app.get("/secure", isAuthenticated, (req, res) => res.sendFile(path.join(__dirname, "../Front-end", "secure.html")));
 
+
 app.get("/user", (req, res) => {
   if (req.session.userName) {
     res.json({ name: req.session.userName});

@@ -20,6 +20,8 @@ export const login = async (req, res) => {
     }
     req.session.userId = foundUser._id;
     req.session.userName = foundUser.name;
+    console.log("Requête de connexion reçue :", req.body);
+    console.log(`Utilisateur connecté : ${foundUser.name} (${foundUser.email})`);
     res.send(`<script>
                 alert('Connexion réussie!');
                 window.location.href='/secure';
@@ -34,6 +36,7 @@ export const login = async (req, res) => {
 };
 
 export const register = async (req, res) => {
+  
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return res.send(`<script>
@@ -49,6 +52,8 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
+    console.log("Requête d'inscription reçue :", req.body);
+    console.log(`Nouvel utilisateur inscrit : ${name} (${email})`);
     res.send(`<script>
                 alert("Inscription réussie !");
                 window.location.href="/";
