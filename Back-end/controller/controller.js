@@ -17,31 +17,32 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: 'Mot de passe incorrect' });
     }
 
-    // Vérifiez si la clé secrète est définie
-    const secret = process.env.SESSION_SECRET;
-    if (!secret) {
+    if (!process.env.SESSION_SECRET) {
       return res.status(500).json({ message: 'Clé secrète manquante' });
     }
 
     const token = jwt.sign(
-      { userId: foundUser._id },  // Assurez-vous que l'ID de l'utilisateur est bien encodé
-      secret,
+      { userId: foundUser._id },  
+      process.env.SESSION_SECRET,
       { expiresIn: '1h' }
     );
-    
+
+    console.log("Token généré:", token); // Vérifie si le token est bien généré
 
     res.json({
+      token,
       user: foundUser._id,
       name: foundUser.name,
       email: foundUser.email,
       message: 'Connexion réussie',
-      token, // Ajoutez le token dans la réponse
+      
     });
   } catch (err) {
-    console.error('Erreur lors de la tentative de connexion:', err);
+    console.error('Erreur lors de la connexion:', err);
     res.status(500).json({ message: 'Erreur interne du serveur', error: err.message });
   }
 };
+
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;

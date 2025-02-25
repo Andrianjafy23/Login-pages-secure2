@@ -1,5 +1,6 @@
 // routes.js
 import express from "express";
+import User from "../models/user.js";
 import { login, register } from "../controller/controller.js";
 import jwt from 'jsonwebtoken';
 
@@ -12,16 +13,21 @@ const authenticate = (req, res, next) => {
     return res.status(401).json({ message: "Accès non autorisé, token manquant" });
   }
 
+  if (!process.env.SESSION_SECRET) {
+    return res.status(500).json({ message: "Clé secrète JWT non définie" });
+  }
+
   try {
-    // Vérifie que le token est valide
     const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-    req.user = decoded;  // Stocker les données décodées du token dans req.user
+    req.user = decoded;
+    console.log(decoded);
     next();
   } catch (err) {
-    console.error('Erreur lors de la validation du token:', err.message);
+    console.error("Erreur lors de la validation du token:", err.message);
     return res.status(401).json({ message: "Token invalide ou malformé", error: err.message });
   }
 };
+
 
 
 router.post("/login", login);
@@ -30,7 +36,7 @@ router.post("/register", register);
 router.get("/user", authenticate, async (req, res) => {
   try {
     // Vérifiez que l'utilisateur existe en base de données
-    const user = await User.findById(req.user.userId);  // Utilisez le userId stocké dans le token
+    const user = await User.findById(req.user.userId);  
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
