@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./Back-end
+    container_name: Back-end
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/user
+
+  frontend:
+    image: nginx:alpine
+    container_name: Front-end
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./Front-end:/usr/share/nginx/html:ro
+
+volumes:
+  mongo-data:
+    driver: local
