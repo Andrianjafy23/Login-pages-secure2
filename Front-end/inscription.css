@@ -1,0 +1,122 @@
+*{
+    list-style: none;
+    text-decoration: none;
+ }
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #f4f4f4;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     margin: 0;
+ }
+ h1,label,p,input,button  {
+   font-family: Roboto Condensed, serif;
+   font-optical-sizing: auto;
+   font-weight: weight;
+   font-style: normal;
+ }
+
+ .login {
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     padding: 30px;
+     width: 400px;
+     text-align: center;
+     gap: 30px;
+ }
+
+ .login h1 {
+     color: #333;
+     font-size: 30px;
+     margin-bottom: 20px;
+ }
+
+ .connecter input {
+     width: 95%;
+     padding: 10px;
+     margin: 10px 0;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     font-size: 16px;
+ }
+
+ .connecter input:focus {
+     border-color: #4CAF50;
+     outline: none;
+ }
+
+ .connecter button {
+     width: 100%;
+     padding: 12px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+ }
+ .butt{
+     width: 100%;
+     padding: 12px;
+     background-color: #5a6d5b;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+     margin-top: 15px;
+ }
+
+ .connecter button:hover {
+     background-color: #45a049;
+ }
+ .motsdepass{
+     display: flex;
+     align-items: center;
+     justify-content: left;
+     margin-top: 10px;
+     gap:5px ;
+      
+ }
+ .motsdepass input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+ }
+ .motsdepass p {
+   margin: 0;
+   cursor: pointer;
+ }   
+ #email1{
+      margin-right: 366px;
+      font-size: 20px;
+ }
+ #mots{
+     font-size: 20px;
+     margin-right: 243px;
+ }
+ #name1{
+     font-size: 20px;
+     margin-right: 366px;
+ }
+ .connecter  .butt{
+     width: 70%;
+     padding: 12px;
+     background-color: #5a6d5b;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+     margin-top: 15px;
+ }
+ .connecter{
+     padding: 20px;
+ }
+

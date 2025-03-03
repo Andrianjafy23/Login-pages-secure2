@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inscription.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Login</title>
+       
+</head>
+<body>
+    <div class="login">
+        <div>
+            <h1>Inscription</h1>
+            <div id="error-message" style="color: red; display: none;"></div>
+        </div>
+        <div class="connecter">
+            <form id="registerForm" action="/register" method="POST">
+                <div >
+                    <label id="name1" for="">Nom</label>
+                    <input id="name" type="text" name="name" placeholder="Entrez votre nom">
+                </div>
+                <div >
+                    <label id="email1" for="">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Entrez votre email" required />
+                </div>
+                <div >
+                    <label id="mots" for="">Mots de passe</label>
+                    <input type="password"  name="password" id="password" placeholder="Entrez votre mot de passe" required />
+                </div>       
+                <div class="motsdepass">
+                    <input type="checkbox" id="Afficher">
+                    <p>Afficher le mots de passe</p>
+                </div> 
+                <button type="submit">S'inscrire</button>
+                <button class="butt">
+                    <a href="/">Se connecter</a>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="inscription.js" defer></script>                                                                
+</body>
+</html>

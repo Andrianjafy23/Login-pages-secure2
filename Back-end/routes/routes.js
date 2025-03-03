@@ -51,5 +51,5 @@ router.get("/user", authenticate, async (req, res) => {
   }
 });
 
-// Exportation par défaut du routeur
+
 export default router;

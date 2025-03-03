@@ -1,3 +1,12 @@
+document.getElementById("Afficher").addEventListener("change", function () {
+    let passwordField = document.getElementById("password");
+    if (this.checked) {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+});
+
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -16,7 +25,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         if (rep.inscrit) {
             // Redirection en cas de succès
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'connexion.html';
             }, 2000);
         } else if (rep.message) { 
             document.getElementById("error-message").textContent = rep.message;

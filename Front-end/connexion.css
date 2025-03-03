@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Login</title>
-    <style>
+
         *{
            list-style: none;
            text-decoration: none;
@@ -127,44 +118,3 @@
             font-size: 20px;
             margin-right: 208px;
         }
-    </style>
-</head>
-<body>
-    <div class="login">
-        <h1>Connexion</h1>
-        <p id="error-message" style="color: red; display: none;">Email ou mot de passe incorrect</p>
-        <div class="connecter">
-            <form id="loginForm" >
-                <div class="email">
-                    <label id="email" for="">Email</label>
-                    <input type="email" id="loginEmail" name="email" placeholder="Entrez votre email" required />
-                </div>
-                <div class="pass">
-                    <label id="mots" for="">Mots de passe</label>
-                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required />
-                </div>
-                <div class="motsdepass">
-                    <input type="checkbox" id="Afficher"> 
-                    <p>Afficher le mots passe</p> 
-                </div>               
-                <button type="submit">Se connecter</button>     
-            </form>
-            <button class="butt">
-                <a href="inscrit.html">Créer un compte</a>
-            </button>
-        </div>
-    </div>
-    <script src="./connex.js" ></script>
-    <script>
-        document.getElementById("Afficher").addEventListener("change", function () {
-    let passwordField = document.getElementById("password");
-    if (this.checked) {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
-});
-    </script>
-</body>
-
-</html>

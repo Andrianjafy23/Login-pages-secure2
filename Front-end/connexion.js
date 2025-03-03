@@ -1,3 +1,12 @@
+
+document.getElementById("Afficher").addEventListener("change", function () {
+    let passwordField = document.getElementById("password");
+    if (this.checked) {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+});
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").then(() => {
         console.log("Service Worker enregistré");
