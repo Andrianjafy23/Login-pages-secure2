@@ -14,13 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
         const message = document.getElementById("message");
 
+        if (newPassword !== confirmPassword) {
+            message.style.color = "red";
+            message.textContent = "Les mots de passe ne correspondent pas.";
+            message.style.display = "block";
+            return;
+        }
+
         try {
-            const response = await fetch("http://localhost:5000/api/password", {
+            const response = await fetch("http://localhost:3000/api/password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, newPassword }),
+                body: JSON.stringify({ email, newPassword, confirmPassword }),
             });
 
             const data = await response.json();
@@ -39,5 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         message.style.display = "block";
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("Afficher").addEventListener("change", function () {
+        let newPasswordField = document.getElementById("newPassword");
+        let confirmPasswordField = document.getElementById("confirmPassword");
+        
+        let type = this.checked ? "text" : "password";
+        newPasswordField.type = type;
+        confirmPasswordField.type = type;
     });
 });

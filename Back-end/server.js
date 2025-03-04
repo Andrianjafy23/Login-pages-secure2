@@ -1,11 +1,10 @@
-// server.js
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
-import path from "path";
 import cors from "cors";
+import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/routes.js";
+import connectDB from "./database/database.js"; 
 
 dotenv.config();
 const app = express();
@@ -14,16 +13,11 @@ app.use(cors());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../Front-end"))); 
 
-// Connexion à MongoDB
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("Connecté à Mongo local"))
-.catch(err => console.error("Erreur de connexion à MongoDB:", err));
+connectDB();
 
-// Routes
 app.use("/api", authRoutes);
 
 const PORT = process.env.PORT || 5000;

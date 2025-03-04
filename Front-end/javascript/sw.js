@@ -11,12 +11,10 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
     const { request } = event;
 
-    // Intercepte seulement la requête login
     if (request.url.includes("/api/login") && request.method === "POST") {
         event.respondWith(
             fetch(request)
                 .then((response) => {
-                    // Clone la réponse pour l'utiliser et la stocker
                     const clonedResponse = response.clone();
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(request, clonedResponse);
@@ -24,7 +22,7 @@ self.addEventListener("fetch", (event) => {
                     return response;
                 })
                 .catch(() => {
-                    // En cas d'erreur réseau, retourne la réponse en cache
+
                     return caches.match(request).then((cachedResponse) => {
                         return cachedResponse || new Response(
                             JSON.stringify({ error: "Mode hors ligne. Aucune réponse en cache." }),

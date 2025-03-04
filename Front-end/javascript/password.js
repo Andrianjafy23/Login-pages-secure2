@@ -1,3 +1,5 @@
+
+
 document.getElementById("forgotPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -5,7 +7,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
     const message = document.getElementById("message");
 
     try {
-        const response = await fetch("http://localhost:5000/api/check-email", {
+        const response = await fetch("http://localhost:3000/api/check-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
@@ -14,7 +16,6 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
         const data = await response.json();
 
         if (response.ok) {
-            // Redirection vers le formulaire de modification avec l'email dans l'URL
             window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
         } else {
             message.style.color = "red";

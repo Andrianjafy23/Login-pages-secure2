@@ -2,7 +2,6 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// Fonction pour la connexion
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -36,7 +35,7 @@ export const login = async (req, res) => {
   }
 };
 
-// Fonction pour l'inscription
+
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -63,7 +62,7 @@ export const register = async (req, res) => {
   }
 };
 
-// Fonction pour obtenir les informations de l'utilisateur authentifié
+
 export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
@@ -114,12 +113,15 @@ export const checkEmail = async (req, res) => {
   }
 };
 
-
 export const password = async (req, res) => {
-  const { email, newPassword } = req.body;
+  const { email, newPassword, confirmPassword } = req.body;
 
-  if (!email || !newPassword) {
-    return res.status(400).json({ message: "L'email et le mot de passe sont requis" });
+  if (!email || !newPassword || !confirmPassword) {
+    return res.status(400).json({ message: "L'email et les mots de passe sont requis." });
+  }
+
+  if (newPassword !== confirmPassword) {
+    return res.status(400).json({ message: "Les mots de passe ne correspondent pas." });
   }
 
   try {
@@ -138,3 +140,41 @@ export const password = async (req, res) => {
   }
 };
 
+
+export const changePassword = async (req, res) => {
+  console.log("Utilisateur en session :", req.user); // Vérification
+
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+
+  if (!req.user || !req.user.userId) {
+    return res.status(401).json({ message: "Non autorisé. Aucun utilisateur authentifié." });
+  }
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    return res.status(400).json({ message: "Tous les champs sont requis." });
+  }
+
+  if (newPassword !== confirmPassword) {
+    return res.status(400).json({ message: "Les mots de passe ne correspondent pas." });
+  }
+
+  try {
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Mot de passe actuel incorrect." });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ message: "Mot de passe modifié avec succès." });
+  } catch (err) {
+    res.status(500).json({ message: "Erreur serveur", error: err.message });
+  }
+};
