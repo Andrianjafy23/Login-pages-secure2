@@ -33,10 +33,9 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
       messageEl.textContent = data.message || "Mot de passe modifié avec succès.";
       messageEl.style.color = "green";
       
-      // Redirection après 2 secondes
       setTimeout(() => {
         window.location.href = "secure.html";
-      }, 2000);
+      }, 1000);
       
     } else {
       messageEl.textContent = data.message || "Une erreur est survenue.";
@@ -45,7 +44,7 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
   } catch (error) {
     messageEl.textContent = "Erreur de connexion au serveur.";
     messageEl.style.color = "red";
-    console.error("Erreur :", error); // Affichage des erreurs dans la console pour le débogage
+    console.error("Erreur :", error); 
   }
 });
 

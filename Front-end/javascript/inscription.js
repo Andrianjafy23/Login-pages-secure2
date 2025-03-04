@@ -24,7 +24,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         if (rep.inscrit) {
             setTimeout(() => {
                 window.location.href = 'connexion.html';
-            }, 2000);
+            }, 1000);
         } else if (rep.message) { 
             document.getElementById("error-message").textContent = rep.message;
             document.getElementById("error-message").style.display = "block";

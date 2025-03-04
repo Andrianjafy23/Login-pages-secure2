@@ -35,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
             setTimeout(() => {
                 window.location.href = "secure.html";
-            }, 2000);
+            }, 1000);
         } else {
             errorMessage.style.display = "block";
             errorMessage.textContent = "Email ou mot de passe incorrect";
