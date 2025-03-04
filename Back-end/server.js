@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
-// Importation par défaut de routes.js
 import authRoutes from "./routes/routes.js";
 
 dotenv.config();
@@ -27,5 +26,5 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use("/api", authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));

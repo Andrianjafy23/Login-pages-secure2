@@ -75,17 +75,55 @@ export const getUser = async (req, res) => {
     res.status(500).json({ message: "Erreur lors de la récupération de l'utilisateur", error: err.message });
   }
 };
+export const authenticate = (req, res, next) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
-// Fonction pour réinitialiser le mot de passe
-export const resetPassword = async (req, res) => {
-  const { email, newPassword } = req.body;
+  if (!token) {
+    return res.status(401).json({ message: "Accès non autorisé, token manquant" });
+  }
 
-  if (!email || !newPassword) {
-    return res.status(400).json({ message: "L'email et le nouveau mot de passe sont requis" });
+  if (!process.env.SESSION_SECRET) {
+    return res.status(500).json({ message: "Clé secrète JWT non définie" });
   }
 
   try {
-    const user = await User.findOne({ email });
+    const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: "Token invalide ou malformé", error: err.message });
+  }
+};
+
+export const checkEmail = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: "L'email est requis" });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      return res.status(404).json({ message: "Email non trouvé" });
+    }
+
+    res.json({ message: "Email valide" });
+  } catch (err) {
+    res.status(500).json({ message: "Erreur serveur", error: err.message });
+  }
+};
+
+
+export const password = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword) {
+    return res.status(400).json({ message: "L'email et le mot de passe sont requis" });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
@@ -94,8 +132,9 @@ export const resetPassword = async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    res.json({ message: "Mot de passe réinitialisé avec succès" });
+    res.json({ message: "Mot de passe modifié avec succès" });
   } catch (err) {
-    res.status(500).json({ message: "Erreur lors de la réinitialisation du mot de passe", error: err.message });
+    res.status(500).json({ message: "Erreur serveur", error: err.message });
   }
 };
+
