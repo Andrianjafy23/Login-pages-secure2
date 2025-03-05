@@ -22,7 +22,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
             setTimeout(() => {
                 console.log("Redirection en cours...");
                 window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
-            }, 3000);
+            }, 1000);
         } else {
             message.style.color = "red";
             message.textContent = "Erreur : " + data.message;

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log("Utilisateur connecté :", req.body);
 
   try {
     const foundUser = await User.findOne({ email });
@@ -38,6 +39,7 @@ export const login = async (req, res) => {
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log("Inscription réussi:", req.body);
 
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Tous les champs sont requis" });
