@@ -55,6 +55,7 @@ export const register = async (req, res) => {
 
     res.json({
       inscrit: newUser.name,
+      email: newUser.email,
       message: "Inscription réussie",
     });
   } catch (err) {
@@ -74,6 +75,8 @@ export const getUser = async (req, res) => {
     res.status(500).json({ message: "Erreur lors de la récupération de l'utilisateur", error: err.message });
   }
 };
+
+
 export const authenticate = (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 

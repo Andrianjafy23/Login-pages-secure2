@@ -1,5 +1,3 @@
-
-
 document.getElementById("forgotPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -14,16 +12,26 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
         });
 
         const data = await response.json();
+        console.log("Réponse du serveur :", data);
 
         if (response.ok) {
-            window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
+            message.style.color = "green";
+            message.textContent = "Utilisateur bien existé !";
+
+            console.log("Redirection prévue dans 3 secondes...");
+            setTimeout(() => {
+                console.log("Redirection en cours...");
+                window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
+            }, 3000);
         } else {
             message.style.color = "red";
             message.textContent = "Erreur : " + data.message;
+            console.log("Erreur du serveur :", data.message);
         }
     } catch (error) {
         message.style.color = "red";
         message.textContent = "Erreur de connexion au serveur.";
+        console.error("Erreur de connexion :", error);
     }
 
     message.style.display = "block";

@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 message.style.color = "green";
                 message.textContent = "Mot de passe modifié avec succès !";
-                setTimeout(() => window.location.href = "connexion.html", 2000);
+                setTimeout(() => window.location.href = "connexion.html", 1000);
             } else {
                 message.style.color = "red";
                 message.textContent = "Erreur : " + data.message;
