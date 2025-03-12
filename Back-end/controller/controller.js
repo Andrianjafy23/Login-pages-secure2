@@ -121,6 +121,8 @@ export const checkEmail = async (req, res) => {
 export const password = async (req, res) => {
   const { email, newPassword, confirmPassword } = req.body;
 
+  console.log("Réinitialisation du mot de passe:", req.body); 
+
   if (!email || !newPassword || !confirmPassword) {
     return res.status(400).json({ message: "L'email et les mots de passe sont requis." });
   }
@@ -147,9 +149,9 @@ export const password = async (req, res) => {
 
 
 export const changePassword = async (req, res) => {
-  console.log("Utilisateur en session :", req.user); // Vérification
 
   const { currentPassword, newPassword, confirmPassword } = req.body;
+  console.log("modification de mots de passe :", req.body); 
 
   if (!req.user || !req.user.userId) {
     return res.status(401).json({ message: "Non autorisé. Aucun utilisateur authentifié." });
@@ -170,7 +172,7 @@ export const changePassword = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(currentPassword, user.password);
-    if (!isMatch) {
+   if (!isMatch) {
       return res.status(400).json({ message: "Mot de passe actuel incorrect." });
     }
 
@@ -183,3 +185,4 @@ export const changePassword = async (req, res) => {
     res.status(500).json({ message: "Erreur serveur", error: err.message });
   }
 };
+  

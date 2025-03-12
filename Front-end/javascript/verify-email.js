@@ -18,7 +18,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
             message.style.color = "green";
             message.textContent = "Utilisateur bien existé !";
 
-            console.log("Redirection prévue dans 3 secondes...");
+            console.log("Redirection prévue dans 1 secondes...");
             setTimeout(() => {
                 console.log("Redirection en cours...");
                 window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;

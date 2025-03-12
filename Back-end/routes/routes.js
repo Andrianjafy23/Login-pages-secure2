@@ -8,8 +8,8 @@ router.post("/login", login);
 router.post("/register", register);
 router.get("/user", authenticate, getUser);
 router.post("/check-email", checkEmail);
-router.post("/password", password);
-router.post("/change-password", authenticate, changePassword);
+router.put("/password", password);
+router.put("/change-password", authenticate, changePassword);
 
 
 

@@ -19,7 +19,7 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
 
   try {
     const response = await fetch("http://localhost:3000/api/change-password", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${session}`, 
