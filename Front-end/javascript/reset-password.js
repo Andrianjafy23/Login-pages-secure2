@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/api/password", {
-                method: "PUT",
+            const response = await fetch("http://localhost:3000/api/reset-password", {
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, newPassword, confirmPassword }),
             });
@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
         message.style.display = "block";
     });
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("Afficher").addEventListener("change", function () {
